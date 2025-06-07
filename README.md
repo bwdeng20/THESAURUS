@@ -17,11 +17,11 @@ Full version available at arXiv ([arXiv:2412.11550](https://arxiv.org/abs/2412.1
 <!-- 第二行：两个可视化对比图并排 -->
 <div align="center" style="display: flex; justify-content: center; gap: 20px;">
   <div>
-    <img width="350" src="imgs/t-sne_cora_DinkNet.svg"/>
+    <img width="300" src="imgs/t-sne_cora_DinkNet.svg"/>
     <p><em>Old SOTA Learned Representation</em></p>
   </div>
   <div>
-    <img width="350" src="imgs/t-sne_cora_THESAURUS.svg"/>
+    <img width="300" src="imgs/t-sne_cora_THESAURUS.svg"/>
     <p><em>Our Method Learned Representation</em></p>
   </div>
 </div>
