@@ -1,0 +1,162 @@
+model:
+  class_path: gwclustering.models.GWClusteringv2
+  init_args:
+    backbone:
+      class_path: gnng.nn.GCN
+      init_args:
+        in_channels: 745
+        hidden_channels: 512
+        num_layers: 2
+        out_channels: 512
+        dropout: 0.30000000000000004
+        act: prelu
+        act_first: false
+        act_kwargs: null
+        norm: null
+        norm_kwargs: null
+        jk: null
+        tape: false
+        num_pre_lin: 0
+        num_post_lin: 0
+        spec_norm: null
+        improved: false
+        cached: false
+        add_self_loops: null
+        normalize: true
+        bias: true
+        aggr: sum
+        aggr_kwargs: null
+        flow: source_to_target
+        node_dim: -2
+        decomposed_layers: 1
+    projector:
+      class_path: gwclustering.models.GWGCDHead
+      init_args:
+        in_channels: 512
+        hidden_channels: 512
+        out_channels: 63
+        bb_out_channels: 512
+        num_heads: 1
+        num_layers: 2
+        mlp_kwargs:
+          norm: batchnorm
+        init_proto_topo: null
+        init_proto_weight: null
+        proto_topo_identity_weight: 0.0
+        proto_topo_momentum: 0.99
+        proto_weight_momentum: 0.999
+        proto_topo_with_struc: false
+    predictor:
+      class_path: gnng.nn.KMeans
+      init_args:
+        k: 8
+        tolerance: 1.0e-05
+        max_iterations: 100
+        init: k-means++
+        n_init: 4
+        random_state: null
+        n_jobs: null
+        pairwise_batch_size: null
+        force_on_cpu: false
+        device: cuda
+        impl: native
+        verbose: false
+        save_the_last_run: false
+        max_points_per_centroid: null
+dataset:
+  class_path: gnng.data.UnifiedNodeEdgeLevelDataset
+  init_args:
+    name: amazon-photo
+    root: data
+    transform:
+      class_path: torch_geometric.transforms.Compose
+      init_args:
+        transforms:
+        - class_path: torch_geometric.transforms.NormalizeFeatures
+          init_args:
+            attrs:
+            - x
+        - class_path: gnng.data.StratifyDataSplitter
+          init_args:
+            train_val_test:
+            - 60
+            - 20
+            - 20
+            seed: 2050
+    pre_transform: null
+    dataset_kwargs: null
+loader:
+  name: full
+  torch: null
+  shadowhop: null
+  sage_sampler: null
+eval_loader: null
+loader_transform: null
+trainer:
+  accelerator: gpu
+  strategy: auto
+  devices:
+  - 0
+  precision: 32-true
+  plugins: null
+  callbacks: null
+  loggers: null
+  max_epochs: 200
+  max_steps: null
+  grad_accum_steps: 1
+  limit_train_batches: .inf
+  limit_val_batches: .inf
+  limit_test_batches: .inf
+  check_val_every_n_epoch: 1
+  use_distributed_sampler: false
+  default_root_dir: null
+  checkpoint_frequency: 1
+  ckpt_verbose: false
+  batch_out_on_cpu: true
+optimizer:
+  class_path: torch.optim.Adam
+  init_args:
+    lr: 0.001
+    betas:
+    - 0.9
+    - 0.999
+    eps: 1.0e-08
+    weight_decay: 0.0
+    amsgrad: false
+    foreach: null
+    maximize: false
+    capturable: false
+    differentiable: false
+    fused: null
+scheduler: null
+augmentors:
+- class_path: gnng.data.UniformEdgeRemover
+  init_args:
+    pe: 0.30000000000000004
+    px: 0.30000000000000004
+- class_path: gnng.data.UniformEdgeRemover
+  init_args:
+    pe: 0.30000000000000004
+    px: 0.30000000000000004
+criterion:
+  class_path: gwclustering.losses.GWClusteringLossv2
+  init_args:
+    sup_weight: 0.35
+    loss_fn_gw_pseudo:
+      class_path: gwclustering.losses.GWPseudoLabelLossv2
+      init_args:
+        temp: 0.6
+        gw_num_iters: 15
+        gw_alpha: 0.45000000000000007
+        gw_epsilon: 0.05
+        rel_epsilon: false
+        sinkhorn_num_iters: 10
+        use_primal_sinkhorn: true
+        use_KL_regularization: true
+splitter: null
+tvt_graph_producer: null
+compile_kwargs: null
+monitor: valid/ClusteringAccuracy
+wandb_cfg: null
+seeds:
+- 20

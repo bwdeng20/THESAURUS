@@ -1,0 +1,150 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "gnng"
+version = "0.0.1alpha2"
+authors = [
+    { name = "Bowen Deng", email = "bowen.deng20@gmail.com" },
+]
+description = "gnn"
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = [
+    "deep-learning",
+    "graph-neural-networks",
+    "graph-convolutional-networks",
+    "knowledge distillation"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    # "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = [
+    "numpy",
+    "scipy",
+    "ogb",
+    "lightning>=2.0.0",
+    "torchmetrics>=1.1.1",
+    "torch-geometric>=2.5",
+    "colorlog",
+    "termcolor",
+    "wandb==0.16.6",
+    "numba",
+    "matplotlib",
+    "seaborn",
+    "jsonargparse[all]==4.27.1",
+    "rootutils",
+    "tabulate",
+    "scikit-learn",
+]
+
+[project.optional-dependencies]
+
+
+dev = [
+    "gnng[full]",
+    "pre-commit",
+    "black",
+    "ruff"
+]
+
+
+full = [
+    "gnng[cli]",
+    "wandb",
+    "tensorboard",
+    # some addtional
+    "termcolor",
+    "wandb",
+    "tabulate",
+    "matplotlib",
+    "seaborn",
+    "numba",
+    "omegaconf",
+    "rootutils"
+]
+
+[project.urls]
+#documentation="https://gnng.readthedocs.io"
+#repository="https://github.com/bwdeng20/gnng.git"
+changelog = "https://github.com/bwdeng20/gnng/blob/master/CHANGELOG.md"
+
+[tool.flit.module]
+name = "gnng"
+
+[tool.yapf]
+based_on_style = "pep8"
+split_before_named_assigns = false
+blank_line_before_nested_class_or_def = false
+
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+profile = "black"
+skip = [".gitignore", "__init__.py"]
+
+
+[tool.black]
+line-length = 120
+target-version = ["py39", "py310", "py311"]
+
+[tool.ruff]
+line-length = 120
+# target-version ="py38" automatically infer from `requires-python`
+
+[tool.docformatter]
+recursive = true
+# this need to be shorter as some docstings are r"""...
+wrap-summaries = 119
+wrap-descriptions = 120
+blank = true
+
+[tool.mypy]
+files = [
+    "gnng",
+]
+
+[tool.pytest.ini_options]
+addopts = [
+    "--capture=no",
+    "--color=yes",
+    "-vv",
+]
+filterwarnings = [
+    "ignore:distutils:DeprecationWarning",
+    # Filter `torch` warnings:
+    "ignore:The PyTorch API of nested tensors is in prototype stage:UserWarning",
+    "ignore:scatter_reduce():UserWarning",
+    "ignore:Sparse CSR tensor support is in beta state:UserWarning",
+    "ignore:Sparse CSC tensor support is in beta state:UserWarning",
+    "ignore:torch.distributed._sharded_tensor will be deprecated:DeprecationWarning",
+    # Filter `captum` warnings:
+    "ignore:Setting backward hooks on ReLU activations:UserWarning",
+    "ignore:.*did not already require gradients, required_grads has been set automatically:UserWarning",
+    # Filter `pytorch_lightning` warnings:
+    "ignore:GPU available but not used:UserWarning",
+]
+
+
+
+[tool.coverage.run]
+source = ["gnng"]
+omit = [] # to fill some files to omit
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "pass",
+    "raise NotImplementedError",
+    "register_parameter",
+    "torch.cuda.is_available",
+]

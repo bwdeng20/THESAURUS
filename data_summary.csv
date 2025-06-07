@@ -1,0 +1,25 @@
+Dataset,#nodes,#edges,#node_features,#edge_features,#classes,undirected,#train,#val,#test
+cora,2708,10556,1433,0,7,TRUE,,,
+citeseer,3327,9104,3703,0,6,TRUE,,,
+pubmed,19717,88648,500,0,3,TRUE,,,
+arxiv,169343,1166243,128,0,40,FALSE,90941,29799,48603
+products,2449029,"123718280	",100,0,47,TRUE,196615,39323,2213091
+reddit2,232965,23213838,602,0,41,TRUE,,,
+reddit,232965,114615892,602,0,41,TRUE,,,
+photo,7650,238162,745,0,8,TRUE,,,
+computers,13752,491722,767,0,10,TRUE,,,
+cs,18333,163788,6805,0,15,TRUE,,,
+physics,34493,495924,8415,0,5,TRUE,,,
+ogbn-arxiv,169343,1166243,128,0,40,FALSE,90941,29799,48603
+ogbn-products,2449029,"123718280	",100,0,47,TRUE,196615,39323,2213091
+amazon-photo,7650,238162,745,0,8,TRUE,,,
+amazon-computers,13752,491722,767,0,10,TRUE,,,
+coauthor-cs,18333,163788,6805,0,15,TRUE,,,
+coauthor-physics,34493,495924,8415,0,5,TRUE,,,
+full-cora,19793,126842,8710,0,70,TRUE,,,
+full-cora_ml,2995,16316,2879,0,7,TRUE,,,
+acm_clustering,3025,26256,1870,0,3,TRUE,,,
+dblp_clustering,4057,7056,334,0,4,TRUE,,,
+uat_clustering,1190,27198,239,0,4,TRUE,,,
+wiki_clustering,2405,23192,4973,0,17,TRUE,,,
+wiki,2405,23192,4973,0,17,TRUE,,,
