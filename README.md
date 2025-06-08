@@ -26,10 +26,6 @@ Full version available at arXiv ([arXiv:2412.11550](https://arxiv.org/abs/2412.1
 </div>
 
 
-
-## Dependencies
-
-
 ## Dependencies
 
 The main dependencies and their versions used in this project are:
