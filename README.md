@@ -77,7 +77,7 @@ Our experiments conducted on all datasets can be reproduced by the config files 
 
 ## Citation
 ```bibtex
-@inproceedings{Deng_Wang_Fu_Huang_Chen_Zhang_2025,
+@inproceedings{deng2025thesaurus,
   title   = {THESAURUS: Contrastive Graph Clustering by Swapping Fused Gromov-Wasserstein Couplings},
   author  = {Deng, Bowen and Wang, Tong and Fu, Lele and Huang, Sheng and Chen, Chuan and Zhang, Tao},
   journal = {Proceedings of the AAAI Conference on Artificial Intelligence},
